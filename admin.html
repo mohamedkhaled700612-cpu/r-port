@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Admin | RK FASHION</title>
+    <link rel="icon" href="/assets/logo/rk-monogram.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/admin.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+  </head>
+  <body class="admin-body">
+    <!-- Sign-in screen -->
+    <section class="auth-screen" id="loginView" hidden>
+      <div class="auth-card reveal is-visible">
+        <div class="monogram" aria-hidden="true"><span>RK</span></div>
+        <p class="eyebrow">Private Administration</p>
+        <h1 class="auth-card__title">RK FASHION</h1>
+        <form id="loginForm" class="form" novalidate>
+          <div class="field">
+            <label for="loginEmail">Email</label>
+            <input id="loginEmail" type="email" autocomplete="username" required />
+            <p class="field__error" data-error-for="loginEmail"></p>
+          </div>
+          <div class="field">
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" autocomplete="current-password" required />
+            <p class="field__error" data-error-for="loginPassword"></p>
+          </div>
+          <button type="submit" class="btn btn--gold btn--block" id="loginSubmit">Sign In</button>
+          <p class="form__status" id="loginStatus" role="alert" hidden></p>
+        </form>
+        <a href="/" class="auth-card__back">Return to the website</a>
+      </div>
+    </section>
+
+    <!-- Verifying access -->
+    <section class="auth-screen" id="checkingView" hidden>
+      <div class="auth-card auth-card--center">
+        <span class="spinner spinner--large" aria-hidden="true"></span>
+        <p class="auth-card__message" role="status">Verifying your access...</p>
+      </div>
+    </section>
+
+    <!-- Not an administrator -->
+    <section class="auth-screen" id="deniedView" hidden>
+      <div class="auth-card auth-card--center">
+        <h1 class="auth-card__title">Access not granted</h1>
+        <p class="auth-card__message">This account is not authorized to open the dashboard.</p>
+        <button type="button" class="btn btn--outline" id="deniedSignOut">Sign out</button>
+      </div>
+    </section>
+
+    <!-- Verification failed -->
+    <section class="auth-screen" id="errorView" hidden>
+      <div class="auth-card auth-card--center">
+        <h1 class="auth-card__title">Connection problem</h1>
+        <p class="auth-card__message">We could not verify your access. Check your connection and try again.</p>
+        <div class="auth-card__actions">
+          <button type="button" class="btn btn--gold" id="errorRetry">Try again</button>
+          <button type="button" class="btn btn--outline" id="errorSignOut">Sign out</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboardView" hidden>
+      <aside class="sidebar" id="sidebar">
+        <a href="/" class="brand brand--admin">
+          <span class="brand__mark">RK</span>
+          <span class="brand__name">RK FASHION</span>
+        </a>
+        <nav class="sidebar__nav" aria-label="Dashboard sections">
+          <button type="button" class="sidebar__link is-active" data-view="overview">Overview</button>
+          <button type="button" class="sidebar__link" data-view="requests">Requests</button>
+          <button type="button" class="sidebar__link" data-view="gallery">Gallery</button>
+          <button type="button" class="sidebar__link" data-view="profile">Profile &amp; CV</button>
+          <button type="button" class="sidebar__link" data-view="contact">Contact &amp; Social</button>
+        </nav>
+        <div class="sidebar__footer">
+          <p class="sidebar__user" id="adminEmail"></p>
+          <button type="button" class="btn btn--outline btn--small btn--block" id="logoutButton">Sign out</button>
+        </div>
+      </aside>
+
+      <div class="dashboard__main">
+        <header class="topbar">
+          <button type="button" class="topbar__menu" id="sidebarToggle" aria-expanded="false" aria-controls="sidebar" aria-label="Open navigation">
+            <span></span><span></span><span></span>
+          </button>
+          <h1 class="topbar__title" id="viewTitle">Overview</h1>
+          <a href="/" class="topbar__site" target="_blank" rel="noopener">View website</a>
+        </header>
+
+        <main class="dashboard__content">
+          <section class="admin-view is-active" id="view-overview" data-title="Overview">
+            <div class="stats-grid" id="statsGrid">
+              <article class="stat-card"><p class="stat-card__label">Total requests</p><p class="stat-card__value" data-stat="total">&ndash;</p></article>
+              <article class="stat-card"><p class="stat-card__label">Pending</p><p class="stat-card__value" data-stat="pending">&ndash;</p></article>
+              <article class="stat-card"><p class="stat-card__label">Approved</p><p class="stat-card__value" data-stat="approved">&ndash;</p></article>
+              <article class="stat-card"><p class="stat-card__label">Rejected</p><p class="stat-card__value" data-stat="rejected">&ndash;</p></article>
+              <article class="stat-card"><p class="stat-card__label">Gallery images</p><p class="stat-card__value" data-stat="gallery">&ndash;</p></article>
+            </div>
+          </section>
+
+          <section class="admin-view" id="view-requests" data-title="Requests" hidden>
+            <div class="toolbar">
+              <input type="search" id="requestSearch" class="toolbar__search" placeholder="Search by name, contact, or type" aria-label="Search requests" />
+              <select id="requestStatusFilter" class="toolbar__select" aria-label="Filter by status">
+                <option value="All">All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Approved">Approved</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+            <p class="admin-status" id="requestsStatus" role="status">Loading requests...</p>
+            <div class="table-wrap" id="requestsTableWrap" hidden>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Submitted</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"><span class="visually-hidden">Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody id="requestsBody"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="admin-view" id="view-gallery" data-title="Gallery" hidden>
+            <div class="toolbar">
+              <select id="galleryStatusFilter" class="toolbar__select" aria-label="Filter by visibility">
+                <option value="All">All images</option>
+                <option value="published">Published</option>
+                <option value="unpublished">Unpublished</option>
+              </select>
+              <button type="button" class="btn btn--gold btn--small" id="uploadImageButton">Upload image</button>
+            </div>
+            <p class="admin-status" id="galleryStatus" role="status">Loading gallery...</p>
+            <div class="admin-gallery" id="adminGalleryGrid"></div>
+          </section>
+
+          <section class="admin-view" id="view-profile" data-title="Profile &amp; CV" hidden>
+            <form id="profileForm" class="admin-form" novalidate>
+              <h2 class="admin-form__title">Profile &amp; CV</h2>
+              <div class="field">
+                <label for="heroIntro">Hero introduction</label>
+                <textarea id="heroIntro" rows="2" maxlength="500"></textarea>
+                <p class="field__error" data-error-for="heroIntro"></p>
+              </div>
+              <div class="field">
+                <label for="bio">Biography</label>
+                <textarea id="bio" rows="6" maxlength="5000"></textarea>
+                <p class="field__hint">Separate paragraphs with a blank line.</p>
+                <p class="field__error" data-error-for="bio"></p>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="location">Location</label>
+                  <input id="location" type="text" maxlength="200" />
+                  <p class="field__error" data-error-for="location"></p>
+                </div>
+                <div class="field">
+                  <label for="languages">Languages</label>
+                  <input id="languages" type="text" maxlength="300" placeholder="Comma separated" />
+                  <p class="field__error" data-error-for="languages"></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="skills">Skills &amp; specialties</label>
+                <textarea id="skills" rows="2" maxlength="2000" placeholder="Comma separated, e.g. Bridal design, Pattern making"></textarea>
+                <p class="field__error" data-error-for="skills"></p>
+              </div>
+              <div class="field">
+                <label for="education">Education &amp; qualifications</label>
+                <textarea id="education" rows="4" maxlength="3000" placeholder="One per line: Title | Institution | Years"></textarea>
+                <p class="field__error" data-error-for="education"></p>
+              </div>
+              <div class="field">
+                <label for="experience">Experience</label>
+                <textarea id="experience" rows="4" maxlength="3000" placeholder="One per line: Role | Organization | Years"></textarea>
+                <p class="field__error" data-error-for="experience"></p>
+              </div>
+              <div class="field">
+                <label for="achievements">Achievements</label>
+                <textarea id="achievements" rows="3" maxlength="3000" placeholder="One per line"></textarea>
+                <p class="field__error" data-error-for="achievements"></p>
+              </div>
+              <div class="field">
+                <label for="certificates">Certificates</label>
+                <textarea id="certificates" rows="3" maxlength="3000" placeholder="One per line"></textarea>
+                <p class="field__error" data-error-for="certificates"></p>
+              </div>
+              <div class="field">
+                <label>Downloadable CV (PDF)</label>
+                <p class="field__hint" id="currentCv">No CV uploaded yet.</p>
+                <input id="cvFile" type="file" accept="application/pdf" />
+                <p class="field__error" data-error-for="cvFile"></p>
+              </div>
+              <div class="admin-form__footer">
+                <p class="admin-status" id="profileStatus" role="status"></p>
+                <button type="submit" class="btn btn--gold" id="profileSave">Save profile</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-view" id="view-contact" data-title="Contact &amp; Social" hidden>
+            <form id="contactForm" class="admin-form" novalidate>
+              <h2 class="admin-form__title">Contact &amp; Social</h2>
+              <p class="field__hint">Only the details you fill in will appear on the website.</p>
+              <div class="form-row">
+                <div class="field">
+                  <label for="email">Email</label>
+                  <input id="email" type="email" maxlength="200" />
+                  <p class="field__error" data-error-for="email"></p>
+                </div>
+                <div class="field">
+                  <label for="phone">Phone</label>
+                  <input id="phone" type="tel" maxlength="50" />
+                  <p class="field__error" data-error-for="phone"></p>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="whatsapp">WhatsApp (international number)</label>
+                  <input id="whatsapp" type="tel" maxlength="50" placeholder="+countrycode number" />
+                  <p class="field__error" data-error-for="whatsapp"></p>
+                </div>
+                <div class="field">
+                  <label for="instagram">Instagram handle</label>
+                  <input id="instagram" type="text" maxlength="300" placeholder="@handle" />
+                  <p class="field__error" data-error-for="instagram"></p>
+                </div>
+              </div>
+              <div class="field">
+                <label for="socialLinks">Other social links</label>
+                <textarea id="socialLinks" rows="4" maxlength="2000" placeholder="One per line: Label | https://..."></textarea>
+                <p class="field__error" data-error-for="socialLinks"></p>
+              </div>
+              <div class="admin-form__footer">
+                <p class="admin-status" id="contactStatus" role="status"></p>
+                <button type="submit" class="btn btn--gold" id="contactSave">Save contact details</button>
+              </div>
+            </form>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script type="module" src="/js/admin.js"></script>
+  </body>
+</html>

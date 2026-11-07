@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Raghad Khaled - RK FASHION. Fashion portfolio, editorial work, and bespoke design requests." />
+    <title>Raghad Khaled | RK FASHION</title>
+    <link rel="icon" href="/assets/logo/rk-monogram.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/responsive.css" />
+    <meta property="og:image" content="https://bolt.new/static/og_default.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://bolt.new/static/og_default.png">
+  </head>
+  <body class="public-site">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="siteHeader">
+      <div class="container site-header__inner">
+        <a href="#top" class="brand" aria-label="RK FASHION home">
+          <span class="brand__mark">RK</span>
+          <span class="brand__name">RK FASHION</span>
+        </a>
+        <nav class="site-nav" id="siteNav" aria-label="Primary">
+          <a href="#about">About</a>
+          <a href="#portfolio">Portfolio</a>
+          <a href="#request">Request</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero__bg" aria-hidden="true"></div>
+        <div class="container hero__content">
+          <div class="monogram monogram--xl reveal" aria-hidden="true"><span>RK</span></div>
+          <p class="eyebrow reveal">RK FASHION</p>
+          <h1 class="hero__title reveal">Raghad Khaled</h1>
+          <p class="hero__intro reveal" id="heroIntro"></p>
+          <div class="hero__actions reveal">
+            <a href="#portfolio" class="btn btn--gold">View Portfolio</a>
+            <a href="#request" class="btn btn--outline">Send a Request</a>
+            <a href="#contact" class="btn btn--ghost">Contact Me</a>
+          </div>
+        </div>
+        <a href="#about" class="hero__scroll" aria-label="Scroll to about">
+          <span></span>
+        </a>
+      </section>
+
+      <section class="section section--about" id="about">
+        <div class="container">
+          <header class="section-heading reveal">
+            <p class="eyebrow">About &amp; CV</p>
+            <h2>The Story Behind the Stitch</h2>
+          </header>
+
+          <div class="about-grid">
+            <div class="about-grid__bio reveal">
+              <p class="lead" id="bioText"></p>
+              <dl class="personal-info" id="personalInfo"></dl>
+              <a href="#" class="btn btn--gold" id="cvDownload" hidden download>Download CV</a>
+            </div>
+            <figure class="about-grid__figure reveal">
+              <img src="https://images.pexels.com/photos/9849648/pexels-photo-9849648.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="A fashion designer working on fabric in a studio" loading="lazy" />
+            </figure>
+          </div>
+
+          <div class="cv-grid">
+            <div class="cv-block reveal" id="skillsBlock" hidden>
+              <h3>Skills &amp; Specialties</h3>
+              <ul class="chip-list" id="skillsList"></ul>
+            </div>
+            <div class="cv-block reveal" id="educationBlock" hidden>
+              <h3>Education &amp; Qualifications</h3>
+              <ol class="timeline" id="educationList"></ol>
+            </div>
+            <div class="cv-block reveal" id="experienceBlock" hidden>
+              <h3>Experience</h3>
+              <ol class="timeline" id="experienceList"></ol>
+            </div>
+            <div class="cv-block reveal" id="achievementsBlock" hidden>
+              <h3>Achievements</h3>
+              <ul class="check-list" id="achievementsList"></ul>
+            </div>
+            <div class="cv-block reveal" id="certificatesBlock" hidden>
+              <h3>Certificates</h3>
+              <ul class="check-list" id="certificatesList"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--portfolio" id="portfolio">
+        <div class="container">
+          <header class="section-heading reveal">
+            <p class="eyebrow">Portfolio</p>
+            <h2>Selected Works</h2>
+          </header>
+
+          <div class="filters reveal" id="galleryFilters" role="toolbar" aria-label="Filter gallery by category"></div>
+          <p class="gallery-status" id="galleryStatus" role="status">Loading the collection...</p>
+          <div class="gallery-grid" id="galleryGrid"></div>
+        </div>
+      </section>
+
+      <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer" hidden>
+        <button type="button" class="lightbox__close" id="lightboxClose" aria-label="Close image">&times;</button>
+        <button type="button" class="lightbox__nav lightbox__nav--prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+        <figure class="lightbox__figure">
+          <img id="lightboxImage" src="" alt="" />
+          <figcaption id="lightboxCaption"></figcaption>
+        </figure>
+        <button type="button" class="lightbox__nav lightbox__nav--next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+      </div>
+
+      <section class="section section--request" id="request">
+        <div class="container request-layout">
+          <div class="request-intro reveal">
+            <p class="eyebrow">Work With Me</p>
+            <h2>Send a Request</h2>
+            <p>Tell me about your vision, occasion, or collaboration. Every request is reviewed personally, and you will hear back through the contact details you provide.</p>
+          </div>
+
+          <div class="request-card reveal">
+            <form id="requestForm" class="form" novalidate>
+              <div class="form-row">
+                <div class="field">
+                  <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                  <input id="fullName" name="fullName" type="text" autocomplete="name" maxlength="100" required />
+                  <p class="field__error" data-error-for="fullName"></p>
+                </div>
+                <div class="field">
+                  <label for="contactInfo">Email or phone <span aria-hidden="true">*</span></label>
+                  <input id="contactInfo" name="contactInfo" type="text" autocomplete="email" maxlength="200" required />
+                  <p class="field__error" data-error-for="contactInfo"></p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="requestType">Request type <span aria-hidden="true">*</span></label>
+                <select id="requestType" name="requestType" required>
+                  <option value="">Choose a request type</option>
+                </select>
+                <p class="field__error" data-error-for="requestType"></p>
+              </div>
+
+              <div class="field">
+                <label for="description">Request details <span aria-hidden="true">*</span></label>
+                <textarea id="description" name="description" rows="6" maxlength="3000" required placeholder="Share the details, timeline, and anything else that will help."></textarea>
+                <p class="field__hint"><span id="descriptionCount">0</span> / 3000</p>
+                <p class="field__error" data-error-for="description"></p>
+              </div>
+
+              <div class="field">
+                <label for="attachment">Attachment <span class="optional">(optional, image or PDF up to 10 MB)</span></label>
+                <input id="attachment" name="attachment" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" />
+                <p class="field__error" data-error-for="attachment"></p>
+              </div>
+
+              <div class="form__footer">
+                <p class="form__note">Fields marked with * are required.</p>
+                <button type="submit" class="btn btn--gold" id="requestSubmit">Submit Request</button>
+              </div>
+              <p class="form__status" id="requestStatus" role="alert" hidden></p>
+            </form>
+
+            <div class="request-confirmation" id="requestConfirmation" hidden role="status" tabindex="-1">
+              <div class="request-confirmation__seal" aria-hidden="true">&#10003;</div>
+              <h3>Thank you</h3>
+              <p>Your request has been received. Raghad will review it and reach out using the contact details you provided.</p>
+              <button type="button" class="btn btn--outline" id="newRequest">Send another request</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--contact" id="contact">
+        <div class="container">
+          <header class="section-heading reveal">
+            <p class="eyebrow">Contact</p>
+            <h2>Let's Connect</h2>
+          </header>
+          <div class="contact-grid" id="contactGrid"></div>
+          <p class="contact-empty" id="contactEmpty" hidden>Contact details will be published soon.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container site-footer__inner">
+        <div class="brand brand--footer">
+          <span class="brand__mark">RK</span>
+          <span class="brand__name">RK FASHION</span>
+        </div>
+        <p>&copy; <span id="year"></span> Raghad Khaled. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
